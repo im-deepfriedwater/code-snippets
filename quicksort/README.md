@@ -15,5 +15,5 @@
 
 ![Visual depiction of quicksort from geeksforgeeks.org](https://www.geeksforgeeks.org/wp-content/uploads/gq/2014/01/QuickSort2.png)
 
-- (A good resource to read about quicksort.)[https://www.geeksforgeeks.org/quick-sort/]
+- [A good resource to read about quicksort](https://www.geeksforgeeks.org/quick-sort/)
 
