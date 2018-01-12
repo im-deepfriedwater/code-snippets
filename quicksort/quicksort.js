@@ -3,7 +3,6 @@
 // Does not mutate the original array.
 
 const quicksort = (array) => {
-
     if (array.length <= 1) {
         return array;
     }
@@ -21,5 +20,5 @@ const quicksort = (array) => {
         }
     });
 
- return quicksort(lesser).concat(pivot, quicksort(greater))
+    return quicksort(lesser).concat(pivot, quicksort(greater))
 };
