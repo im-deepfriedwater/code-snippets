@@ -8,7 +8,7 @@ main =
 -- Elm is a functional language, so we recursively quicksort without
 -- assignment or variables.
 
-quicksort: List comparable -> List comparable
+quicksort: List Float -> List Float
 quicksort list =
     case list of
         [] -> []
