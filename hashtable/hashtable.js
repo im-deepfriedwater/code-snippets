@@ -10,14 +10,7 @@ class HashTable {
   }
 
   insert (key, value) {
-      const index = this.hash(key);
-
-      if (this.buckets[index]) {
-          this.buckets[this.findNextAvaliableSpot()] = {value, key};
-      } else {
-          this.buckets[index] = {value, key};
-      }
-
+      this.handleOpenAddressing(key, value);
       this.numberOfItems++;
       this.growIfNeeded();
   }
@@ -25,17 +18,19 @@ class HashTable {
   get (key) {
       const initialIndex = this.hash(key)
       let currentIndex = initialIndex;
-      while (this.buckets[currentIndex].key !== key) { // TODO bug here
+
+      while (this.buckets[currentIndex]) {
+
+          if (this.buckets[currentIndex].key === key) {
+              return this.buckets[currentIndex].value;
+          }
 
           currentIndex++;
           currentIndex %= this.buckets.length;
-
-          if (currentIndex === initialIndex) {
-              return undefined;
-          }
       }
 
-      return this.buckets[currentIndex].value;
+      throw new Exception("Tried retrieving a value that does not exist in this hash table.");
+
   }
 
   findNextAvaliableSpot (index) {
@@ -47,17 +42,38 @@ class HashTable {
       return newIndex;
   }
 
+  handleOpenAddressing (key, value) {
+      const index = this.hash(key);
+
+      if (this.buckets[index]) {
+          if (this.buckets[index].key === key) {
+              this.buckets[index].value = value;
+          } else {
+              this.buckets[this.findNextAvaliableSpot(index)] = { key, value };
+          }
+
+      } else {
+          this.buckets[index] = { key, value };
+      }
+  }
+
   growIfNeeded () {
       while (this.numberOfItems / this.buckets >= 0.7) {
           this.buckets.length += 1;
       }
-  } // TODO rehash function necessary
+
+      this.rehash();
+  }
+
+  rehash () {
+      const temp = this.buckets;
+      this.buckets = new Array(this.buckets.length);
+
+      temp.forEach((element) => {
+          this.handleOpenAddressing(element.key, element.value);
+      });
+
+      console.log("rehashing..")
+  }
+
 }
-
-const h = new HashTable();
-
-
-h.insert("prize", "basketball");
-h.insert("hired", "no...");
-
-console.log(h.get("hired"))
