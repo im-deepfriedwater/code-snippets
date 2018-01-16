@@ -72,8 +72,6 @@ class HashTable {
       temp.forEach((element) => {
           this.handleOpenAddressing(element.key, element.value);
       });
-
-      console.log("rehashing..")
   }
 
 }
