@@ -1,3 +1,5 @@
+// Worked on with @yshin4.
+
 class HashTable {
   constructor() {
       const initialSize = 10;
@@ -29,7 +31,7 @@ class HashTable {
           currentIndex %= this.buckets.length;
       }
 
-      throw new Exception("Tried retrieving a value that does not exist in this hash table.");
+      throw new Exception(`Tried retrieving using key ${key} which is not in the HashTable`);
 
   }
 

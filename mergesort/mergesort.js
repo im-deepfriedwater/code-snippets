@@ -1,5 +1,5 @@
 // Worked on with @yshin4.
-// Currently space inefficient due to creating new arrays at each step.
+// Currently space inefficient due to creating new arrays at each divide.
 // This could be addressed by working with indices and a single array
 // rather than making new copies of the original array.
 // However, it serves demonstrative and general mergesort algorithm purposes.
